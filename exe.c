@@ -1,38 +1,24 @@
 #include <windows.h>
-#include <stdlib.h>
-#include <time.h>
 
-int WINAPI WinMain(HINSTANCE hlnstance,HINSTANCE hPrev, LPSTR lpCmdLine, int nShowCmd) {
-      HWND hDesktop = GetDesktopWindow();
-      HDC hdc = GetDC(hdesktop)
+int main() {
+    HDC hDesktop = GetDC(NULL);
 
-      srand(time(0));
+    int sw = GetSystemMetrics(SM_CXSCREEN);
+    int sh = GetSystemMetrics(SM_CYSCREEN);
 
-      while (1) {
-         int w = 50 + rand() % 200;
-         int h + 50 + rand() % 200;
+    while (1) {
+        // Efecto visual simple usando StretchBlt
+        StretchBlt(
+            hDesktop,          // destino
+            10, 10, sw-20, sh-20, // tamaño destino
+            hDesktop,          // origen
+            0, 0, sw, sh,      // tamaño origen
+            SRCCOPY            // modo
+        );
 
-         int x = rand() %
-GetSystemMetrics(SM_CXSCREEN);
-         int y = rand() % 
-GetSystemMetrics(SM_CYSCREEN);
-         int x2 = rand() %
-GetSystemMetrics(SM_CXSCREEN);
-         int y2 = rand() % 
-GetSystemMetrics(SM_CYSCREEN);
-      BitBlt(hdc, x, y, w, h, hdc, x2, y2, SRCCOPY);
-
-      StretchBlt(hdc,
-        x, y, w, + (rand()%80 - 40,
-h + (rand()%80 - 40, 
-            hdc,
-            x2, y2, w, h,
-            SRCCOPY
-        ); 
-
-        Sleep(5);
+        Sleep(50); // 50ms
     }
 
-    ReleaseDC(hDesktop, hdc):
+    ReleaseDC(NULL, hDesktop);
     return 0;
 }
